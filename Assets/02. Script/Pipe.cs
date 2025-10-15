@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 2.0f;
+    [SerializeField] private float moveXSpeed = 2.0f;
+    [SerializeField] private float moveYSpeed = 2.0f;
     [SerializeField] private float moveRange = 0.5f;
+    [SerializeField] private float lifeTime = 10.0f;
 
     private float startY;
     private bool movingUp = true;
+    private float timer = 0.0f;
     void Start()
     {
         startY = transform.position.y;
@@ -20,16 +23,27 @@ public class NewBehaviourScript : MonoBehaviour
         Vector3 pos = transform.position;
 
         if (movingUp)
-            pos.y += moveSpeed * Time.deltaTime;
+            pos.y += moveYSpeed * Time.deltaTime;
         else
-            pos.y -= moveSpeed * Time.deltaTime;
+            pos.y -= moveYSpeed * Time.deltaTime;
 
         transform.position = pos;
 
         if (pos.y > startY + moveRange)
             movingUp = false;
         else if (pos.y < startY - moveRange)
-            movingUp = true;    
+            movingUp = true;
+
+
+        pos.x -= moveXSpeed * Time.deltaTime;
+
+        transform.position = pos;
+
+        timer += Time.deltaTime;
+        if (timer >= lifeTime)
+        {
+            Destroy(gameObject);
+        }
 
     }
 }

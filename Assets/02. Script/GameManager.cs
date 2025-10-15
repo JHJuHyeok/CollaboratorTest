@@ -22,6 +22,6 @@ public class GameManager : MonoBehaviour
     {
         Score += amount;
         if (ScoreText != null)
-            ScoreText.text = Score.ToString();
+            ScoreText.text = $"Score: {Score}";
     }
 }
