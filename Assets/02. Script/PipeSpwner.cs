@@ -26,7 +26,7 @@ public class PipeSpwner : MonoBehaviour
         
             float randomY = Random.Range(minY, maxY);
             Vector2 spawnPos = new Vector3(transform.position.x, randomY);
-            Instantiate(pipePrefab, spawnPos, Quaternion.identity);
+            
             pipePrefab = Instantiate(pipePrefab, spawnPos, Quaternion.identity);
        
        
