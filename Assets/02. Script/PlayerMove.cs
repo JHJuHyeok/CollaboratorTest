@@ -75,7 +75,11 @@ public class PlayerMove : MonoBehaviour
         v.x = 0f;                 
         rigd.velocity = v;
 
-        
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.GameOver();
+            Debug.Log("[PlayerMove] Player hit ground -> GameOver called");
+        }
 
         Debug.Log("플레이어가 Grund에 닿음 - 뒤집히고 떨어짐!");
 
