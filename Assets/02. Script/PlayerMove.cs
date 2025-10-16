@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -83,6 +84,11 @@ public class PlayerMove : MonoBehaviour
 
         Debug.Log("플레이어가 Grund에 닿음 - 뒤집히고 떨어짐!");
 
-        
+        StartCoroutine(LoadOverScene());
+    }
+    IEnumerator LoadOverScene()
+    {
+        yield return new WaitForSeconds(1f); // 1초 기다렸다가
+        SceneManager.LoadScene("Over");      // "Over"라는 씬으로 이동
     }
 }
