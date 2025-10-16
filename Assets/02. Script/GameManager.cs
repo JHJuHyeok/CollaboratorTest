@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
         Score += amount;
         if (ScoreText != null)
             ScoreText.text = $"Score: {Score}";
+    }
+    public void StartGame()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void GameOver()
