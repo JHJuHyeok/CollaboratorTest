@@ -8,11 +8,13 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Jump")]
     public float jumpPower = 7f;
+    public AudioSource jumpSfx;
+    public AudioClip jumpSound;
 
     [Header("Death / Collision")]
     public string deathTag = "Grund";        
     public SpriteRenderer spriteRenderer;   
-    public bool isDead = false;             
+    public bool isDead = false;
 
     void Start()
     {
@@ -33,6 +35,8 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             rigd.velocity = Vector2.up * jumpPower;
+
+            JumpSound();
         }
     }
 
@@ -84,5 +88,10 @@ public class PlayerMove : MonoBehaviour
         Debug.Log("플레이어가 Grund에 닿음 - 뒤집히고 떨어짐!");
 
         
+    }
+
+    public void JumpSound()
+    {
+        jumpSfx.PlayOneShot(jumpSound);
     }
 }
