@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 
@@ -15,10 +16,18 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+        DontDestroyOnLoad(gameObject);
+        }
+
         else
+        {
             Destroy(gameObject);
+        }
     }
+
+
 
     public void AddScore(int amount)
     {
@@ -33,4 +42,6 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         Debug.Log("Game Over!");
     }
+
+    
 }
