@@ -12,6 +12,8 @@ public class PipeSpwner : MonoBehaviour
     public
     void Update()
     {
+        if (GameManager.instance != null && GameManager.instance.isGameOver)
+            return;
 
         timer += Time.deltaTime;
         if (timer >= spawnInterval)

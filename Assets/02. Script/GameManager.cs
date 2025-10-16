@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public int Score = 0;
     public TextMeshProUGUI ScoreText;
 
+    public bool isGameOver = false;
+
     private void Awake()
     {
         if (instance == null)
@@ -23,5 +25,12 @@ public class GameManager : MonoBehaviour
         Score += amount;
         if (ScoreText != null)
             ScoreText.text = $"Score: {Score}";
+    }
+
+    public void GameOver()
+    {
+        if (isGameOver) return;
+        isGameOver = true;
+        Debug.Log("Game Over!");
     }
 }

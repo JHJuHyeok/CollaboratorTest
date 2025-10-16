@@ -20,6 +20,9 @@ public class NewBehaviourScript : MonoBehaviour
     
     void Update()
     {
+        if (GameManager.instance != null && GameManager.instance.isGameOver)
+            return;
+
         Vector3 pos = transform.position;
 
         if (movingUp)
