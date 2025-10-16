@@ -18,11 +18,9 @@ public class PlayerMove : MonoBehaviour
     {
         rigd = GetComponent<Rigidbody2D>();
 
-        
+        // SpriteRenderer 자동 연결
         if (spriteRenderer == null)
-        {
             spriteRenderer = GetComponent<SpriteRenderer>();
-        }
     }
 
     void Update()
@@ -30,32 +28,36 @@ public class PlayerMove : MonoBehaviour
         
         if (isDead) return;
 
+        //터치 또는 마우스 입력 모두 지원
+#if UNITY_EDITOR || UNITY_STANDALONE
+        // 에디터나 PC 빌드용: 마우스 클릭으로 테스트
         if (Input.GetMouseButtonDown(0))
         {
             rigd.velocity = Vector2.up * jumpPower;
         }
+#else
+         //터치 입력으로 점프
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            rigd.velocity = Vector2.up * jumpPower;
+        }
+#endif
     }
 
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (isDead) return;
-
         if (other.CompareTag(deathTag))
-        {
             HandleDeath(other.gameObject);
-        }
     }
 
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (isDead) return;
-
         if (collision.gameObject.CompareTag(deathTag))
-        {
             HandleDeath(collision.gameObject);
-        }
     }
 
     private void HandleDeath(GameObject obstacle)
@@ -65,9 +67,7 @@ public class PlayerMove : MonoBehaviour
 
         
         if (spriteRenderer != null)
-        {
-            spriteRenderer.flipY = true;  
-        }
+            spriteRenderer.flipY = true;
 
         
         Vector2 v = rigd.velocity;
@@ -77,8 +77,6 @@ public class PlayerMove : MonoBehaviour
 
         
 
-        Debug.Log("플레이어가 Grund에 닿음 - 뒤집히고 떨어짐!");
-
-        
+        Debug.Log("플레이어가 Grund에 닿음 - 뒤집히고 자연스럽게 떨어짐!");
     }
 }
