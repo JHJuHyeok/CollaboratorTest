@@ -39,9 +39,18 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         if (isGameOver) return;
+        SaveData(Score);
         isGameOver = true;
         Debug.Log("Game Over!");
     }
 
-    
+    public void SaveData(int score)
+    {
+        PlayerPrefs.SetInt("PlayerScore", score);
+    }
+
+    public int LoadData()
+    {
+        return PlayerPrefs.GetInt("PlayerScore");
+    }
 }
